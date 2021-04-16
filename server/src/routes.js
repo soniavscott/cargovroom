@@ -1,25 +1,36 @@
-const express = require('express')
-const router = express.Router()
 const db = require('./db')
 
-router.get('/', async (req, res, next) => {
-  try {
-    const results = await db.all()
-    res.json(results)
-  } catch (e) {
-    console.log(e)
-    res.sendStatus(500)
-  }
-})
+module.exports = (app) => {
+  app.post('/register', (req, res) => {
+    res.send({
+      message: `Your user ${req.body.email} was registered! Have fun!`
+    })
+  })
 
-router.get('/:make', async (req, res, next) => {
-  try {
-    const results = await db.make(req.params.make)
-    res.json(results)
-  } catch (e) {
-    console.log(e)
-    res.sendStatus(500)
-  }
-})
+  app.get('/', async (req, res, next) => {
+    try {
+      const results = await db.all()
+      res.json(results)
+    } catch (e) {
+      res.sendStatus(500)
+    }
+  })
 
-module.exports = router
+  //   app.get('/:make', async (req, res, next) => {
+  //     try {
+  //       const results = await db.make(req.params.make)
+  //       res.json(results)
+  //     } catch (e) {
+  //       res.sendStatus(500)
+  //     }
+  //   })
+
+  app.get('/test/:make', async (req, res, next) => {
+    try {
+      const results = await db.make(req.params.make)
+      res.json(results)
+    } catch (e) {
+      res.sendStatus(500)
+    }
+  })
+}

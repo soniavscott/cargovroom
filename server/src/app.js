@@ -8,7 +8,6 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-const router = require('./routes')
-app.use('', router)
+require('./routes')(app)
 
 app.listen(8081)
