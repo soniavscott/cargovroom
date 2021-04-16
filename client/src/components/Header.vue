@@ -5,8 +5,12 @@
     </div>
 
     <nav class="menu">
-      <div class="menu-item">Search</div>
-      <div class="menu-item">Login</div>
+      <div class="menu-item">
+        <router-link to="/">Search</router-link>
+      </div>
+      <div class="menu-item">
+        <router-link to="/honda">Login</router-link>
+      </div>
     </nav>
   </div>
 </template>

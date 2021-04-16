@@ -1,14 +1,19 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import BrowseVehicles from "../views/BrowseVehicles.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/:make",
-    name: "Home",
-    component: Home,
+    path: "/",
+    name: "BrowseVehicles",
+    component: BrowseVehicles
+  },
+  {
+    path: "/search/:make",
+    name: "BrowseVehicles",
+    component: BrowseVehicles
   }
 ];
 

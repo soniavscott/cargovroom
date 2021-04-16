@@ -1,15 +1,17 @@
 <template>
-  <div>
-    this is a car
+  <div class="vehicle-entry">
+    {{ vehicle }}
   </div>
 </template>
 
 <script>
 
 export default ({
-    name: "Car"
+  name: "VehicleEntry",
+  props: ["vehicle"],
 })
 </script>
 
 <style lang="scss">
+  
 </style>
