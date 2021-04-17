@@ -1,24 +1,32 @@
 <template>
   <div class="vehicle-entry column card is-one-fifth">
-      <div class="card-image">
-        <b-image
-          :src="require('@/assets/images/chevy-trailblazer-2018.png')"
-          alt="2018 Chevy Trailblazer"
-          ratio="5by3"
-        ></b-image>
-      </div>
-
-      <div class="card-header">
-        <div class="card-header-title level">
-          <div class="level-left">
-            <div class="level-item size-5" id="vehicle-make">{{ vehicle.make }} </div>
-            <div class="level-item size-5" id="vehicle-model">{{ vehicle.model }} </div>
-          </div>
-          <div class="level-right">
-            <div class="level-item">{{ vehicle.year }} </div>
-          </div>
-        </div>
+    <div class="card-image">
+      <b-image
+        :src="require('@/assets/images/chevy-trailblazer-2018.png')"
+        alt="2018 Chevy Trailblazer"
+        ratio="5by3"
+      ></b-image>
     </div>
+
+    <div class="vehicle-info">
+      <div class="is-flex-direction-row">
+        <p class="size-5" id="vehicle-make">{{ vehicle.make }}</p>
+        <p class="size-5" id="vehicle-model">{{ vehicle.model }}</p>
+      </div>
+      <p id="vehicle-year">{{ vehicle.year }}</p>
+    </div>
+
+    <!-- <div class="card-header">
+      <div class="card-header-title level">
+        <div class="level-left">
+          <div class="level-item size-5" id="vehicle-make">{{ vehicle.make }} </div>
+          <div class="level-item size-5" id="vehicle-model">{{ vehicle.model }} </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">{{ vehicle.year }} </div>
+        </div>
+      </div>
+    </div> -->
   </div>
 </template>
 
@@ -44,19 +52,31 @@ export default ({
   .card-header {
     box-shadow: none;
   }
-}
 
-#vehicle-model {
-  margin-bottom: 0;
-  font-weight: $weight-normal;
-}
+  .vehicle-info {
+    margin: $size-6;
+    margin-bottom: 0;
 
-#vehicle-make {
-  font-weight: $weight-bold;
+    #vehicle-make {
+      margin-bottom:0;
+      margin-right: 0.4rem;
+      font-weight: $weight-bold;
+    }
+
+    #vehicle-model, #vehicle-year {
+      font-weight: $weight-light;
+    }
+  }
 }
 
 .size-5 {
   font-size: $size-5;
+}
+
+// dunno why bulma's preset var isn't working but this does 
+.is-flex-direction-row {
+  display: flex;
+  flex-direction: row;
 }
 
 </style>
