@@ -1,5 +1,12 @@
 <template>
-  <div id="header"> 
+  <div id="header" class="level">
+    <div class="level-item has-text-centered">
+      <h1 class="title is-1" id="site-title">cargovroom</h1>
+    </div>
+    
+  </div>
+
+  <!-- <div id="header"> 
     <div class="site-title-container">
       <h1 class="site-title">cargovroom</h1>
     </div>
@@ -12,7 +19,7 @@
         <router-link to="/honda">Login</router-link>
       </div>
     </nav>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -23,26 +30,13 @@ export default ({
 
 <style lang="scss">
 #header {
-  background-color: $main-color;
-  padding: 0 20px;
+  background-color: $primary;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .site-title-container {
-    .site-title {
-      font-size: $largest-text-size
-    }
-  }
-
-  .menu {
-    display: flex;
-    align-items: center;
-
-    .menu-item{
-      margin: 10px;
-    }
+  #site-title {
+    font-style: italic;
+    font-weight: $weight-bold;
+    color: $white;
+    margin: $size-6 $size-3;
   }
 }
 

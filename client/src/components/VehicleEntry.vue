@@ -1,6 +1,24 @@
 <template>
-  <div class="vehicle-entry">
-    {{ vehicle }}
+  <div class="vehicle-entry column card is-one-fifth">
+      <div class="card-image">
+        <b-image
+          :src="require('@/assets/images/chevy-trailblazer-2018.png')"
+          alt="2018 Chevy Trailblazer"
+          ratio="5by3"
+        ></b-image>
+      </div>
+
+      <div class="card-header">
+        <div class="card-header-title level">
+          <div class="level-left">
+            <div class="level-item size-5" id="vehicle-make">{{ vehicle.make }} </div>
+            <div class="level-item size-5" id="vehicle-model">{{ vehicle.model }} </div>
+          </div>
+          <div class="level-right">
+            <div class="level-item">{{ vehicle.year }} </div>
+          </div>
+        </div>
+    </div>
   </div>
 </template>
 
@@ -13,5 +31,32 @@ export default ({
 </script>
 
 <style lang="scss">
+.vehicle-entry {
+  margin: $size-7;
+  margin-bottom: $size-3;
+  background-color: $white;
+  border-bottom: 2px solid $primary;
   
+  .card-image {
+    margin: $size-4;
+  }
+
+  .card-header {
+    box-shadow: none;
+  }
+}
+
+#vehicle-model {
+  margin-bottom: 0;
+  font-weight: $weight-normal;
+}
+
+#vehicle-make {
+  font-weight: $weight-bold;
+}
+
+.size-5 {
+  font-size: $size-5;
+}
+
 </style>

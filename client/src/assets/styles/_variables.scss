@@ -1,5 +1,14 @@
-$main-color: #FFC148;
-$white: #fff;
-$text-color: #333;
+@import "~bulma/sass/utilities/_all";
+@import "../../../node_modules/bulma/bulma.sass";
+
+$primary: #FFC148;
+$primary-invert: findColorInvert($primary);
+$text: #333;
+$off-white: rgb(252,251,251);
 
 $largest-text-size: 64px;
+// $card-shadow: 0 0.5em 1em -0.125em rgba($scheme-invert, 0.1), 0 0px 0 1px rgba($scheme-invert, 0.02);
+$card-border: .01em solid $text;
+
+$banner-padding: 0.5rem 1rem;
+$banner-radius: 0.5rem;

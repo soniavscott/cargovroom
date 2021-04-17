@@ -1,8 +1,10 @@
 <template>
-  <div class="browse-vehicles">
+  <div id="browse-vehicles" class="container">
+    <div class="columns is-multiline">
     <VehicleEntry v-for="vehicle in matchingVehicles"
       :key="vehicle.id" 
       :vehicle="vehicle" />
+    </div>
   </div>
 </template>
 
@@ -31,3 +33,13 @@ export default {
 };
 
 </script>
+
+<style lang="scss">
+#browse-vehicles {
+  margin: $size-3;
+  justify-content: center;
+}
+
+
+
+</style>

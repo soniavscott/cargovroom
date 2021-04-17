@@ -20,4 +20,7 @@ export default ({
 
 
 <style lang="scss">
+body {
+  background-color: $off-white
+}
 </style>
