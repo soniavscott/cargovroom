@@ -1,16 +1,22 @@
 <template>
   <div id="browse-vehicles" class="container">
-    <div class="columns is-multiline">
-    <VehicleEntry v-for="vehicle in matchingVehicles"
-      :key="vehicle.id" 
-      :vehicle="vehicle" />
-    </div>
+    <FilterVehicles class="pointer"/>
+
+    <section class="columns is-multiline">
+      <VehicleEntry v-for="vehicle in matchingVehicles"
+        :key="vehicle.id" 
+        :vehicle="vehicle" />
+    </section>
+
+    <AddVehicleButton id="add-vehicle-button" />
   </div>
 </template>
 
 <script>
 import SearchService from "../services/SearchService";
+import FilterVehicles from '../components/FilterVehicles';
 import VehicleEntry from "../components/VehicleEntry";
+import AddVehicleButton from '../components/AddVehicleButton';
 
 export default {
   name: "BrowseVehicles", 
@@ -21,6 +27,7 @@ export default {
   },
   async mounted () {
     const make = this.$route.params.make
+    console.log('route', this.$route.params);
     if (make) {
       this.matchingVehicles = (await SearchService.show(make)).data
       return;
@@ -28,7 +35,9 @@ export default {
     this.matchingVehicles = (await SearchService.all()).data
   },
   components: {
-    VehicleEntry
+    FilterVehicles,
+    VehicleEntry,
+    AddVehicleButton
   }
 };
 
@@ -37,9 +46,12 @@ export default {
 <style lang="scss">
 #browse-vehicles {
   margin: $size-3;
-  justify-content: center;
 }
 
-
+#add-vehicle-button {
+  position: fixed;
+  bottom: $size-3;
+  right: $size-3;
+}
 
 </style>

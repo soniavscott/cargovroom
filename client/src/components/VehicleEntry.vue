@@ -15,18 +15,6 @@
       </div>
       <p id="vehicle-year">{{ vehicle.year }}</p>
     </div>
-
-    <!-- <div class="card-header">
-      <div class="card-header-title level">
-        <div class="level-left">
-          <div class="level-item size-5" id="vehicle-make">{{ vehicle.make }} </div>
-          <div class="level-item size-5" id="vehicle-model">{{ vehicle.model }} </div>
-        </div>
-        <div class="level-right">
-          <div class="level-item">{{ vehicle.year }} </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -38,12 +26,16 @@ export default ({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .vehicle-entry {
   margin: $size-7;
   margin-bottom: $size-3;
   background-color: $white;
   border-bottom: 2px solid $primary;
+
+  :hover {
+    cursor: pointer;
+  }
   
   .card-image {
     margin: $size-4;
@@ -58,7 +50,7 @@ export default ({
     margin-bottom: 0;
 
     #vehicle-make {
-      margin-bottom:0;
+      margin-bottom: 0;
       margin-right: 0.4rem;
       font-weight: $weight-bold;
     }
