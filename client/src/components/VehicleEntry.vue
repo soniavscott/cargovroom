@@ -1,5 +1,10 @@
 <template>
   <div class="vehicle-entry column card is-one-fifth">
+
+  <!-- <div class="vehicle-entry column card is-one-fifth" @mouseover="hover=true" @mouseleave="hover=false"> -->
+    <div id="edit-delete-container">
+      <EntryOptionsButtons v-if="hover" />
+    </div>
     <div class="card-image">
       <b-image
         :src="require('@/assets/images/chevy-trailblazer-2018.png')"
@@ -19,10 +24,18 @@
 </template>
 
 <script>
-
+import EntryOptionsButtons from './EntryOptionsButtons.vue';
 export default ({
   name: "VehicleEntry",
   props: ["vehicle"],
+  data () {
+    return {
+      hover: true,
+    }
+  },
+  components: {
+    EntryOptionsButtons
+  }
 })
 </script>
 
@@ -35,10 +48,14 @@ export default ({
 
   :hover {
     cursor: pointer;
+
   }
+  // #edit-delete-container {
+  //   height: $size-6;
+  // }
   
   .card-image {
-    margin: $size-4;
+    margin: 0 $size-4;
   }
 
   .card-header {

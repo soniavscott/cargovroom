@@ -2,7 +2,7 @@
   <form action="" id="create-card-form">
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Add a vehicle</p>
+        <p class="modal-card-title">Edit vehicle entry</p>
         <button
             type="button"
             class="delete"
@@ -47,9 +47,9 @@
       </section>
 
       <footer class="modal-card-foot is-justify-content-center">
-        <!-- <b-button
-            label="Close"
-            @click="$emit('close')" /> -->
+        <b-button
+            label="Cancel"
+            @click="$emit('close')" />
         <b-button
             label="Save"
             type="is-primary" 
@@ -67,7 +67,7 @@
 <script>
 
 export default ({
-    name: "AddVehicleForm",
+    name: "EditVehicleForm",
     data () {
       return {
         inputMake: '',
