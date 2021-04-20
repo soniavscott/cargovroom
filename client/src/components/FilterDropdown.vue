@@ -2,7 +2,8 @@
   <div class="dropdown is-hoverable">
     <div class="dropdown-trigger">
       <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span>{{ type }}</span>
+        <span v-if="isFiltered">{{ isFiltered }}</span>
+        <span v-else>All {{ pluralizeType(type) }}</span>
         <span class="icon is-small">
         <i class="fas fa-angle-down" aria-hidden="true"></i>
         </span>
@@ -10,12 +11,15 @@
     </div>
     <div class="dropdown-menu" id="dropdown-menu" role="menu">
       <div class="dropdown-content">
-        <a href="/" class="dropdown-item">All Makes</a>
-        <div v-for="make in allMakes" 
-          :key="make.id" 
-          class="dropdown-item" 
-          @click="addMakeFilter(make)">
-        {{ make }}
+        <div class="dropdown-item pointer" @click="clearFilter(type)">
+          All {{ pluralizeType(type) }}
+        </div>
+
+        <div v-for="item in items" 
+          :key="item.id" 
+          class="dropdown-item pointer" 
+          @click="addFilter(type, item)">
+        {{ item }}
         </div>
       </div>
     </div>
@@ -23,29 +27,37 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import EventBus from '../main'
 
 export default ({
   name: "FilterDropdown",
   props: [
     "type",
+    "items"
   ],
   data () {
     return {
-      filter: '',
+      isFiltered: '',
     }
   },
   methods: {
-    addMakeFilter(filter) {
-      this.$store.dispatch('addFilterByMake', filter);
-      EventBus.$emit('added-filter')
+    addFilter(type, filter) {
+      type=type.toLowerCase();
+      this.$store.dispatch('addFilter', {type, filter});
+      this.isFiltered = filter;
+      EventBus.$emit('added-filter');
+    },
+
+    clearFilter(type) {
+      type=type.toLowerCase();
+      this.$store.dispatch('clearFilter', type);
+      this.isFiltered= '';
+    },
+
+    pluralizeType(type) {
+      if (type=="category") return "categories";
+      return type.toLowerCase() + "s";
     }
-  },
-  computed: {
-    ...mapGetters([
-      'allMakes'
-    ])
   }
 })
 </script>
@@ -55,5 +67,12 @@ export default ({
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.dropdown-item {
+  &.pointer:hover {
+    cursor: pointer;
+  }
+
 }
 </style>

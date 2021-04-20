@@ -9,11 +9,10 @@
     </section>
 
     <section v-if="showFiltered" class="columns is-multiline">
-      <VehicleEntry v-for="vehicle in filterVehicleMake"
+      <VehicleEntry v-for="vehicle in filteredVehicles"
         :key="vehicle.id" 
         :vehicle="vehicle" />
     </section>
-
 
     <AddVehicleButton id="add-vehicle-button" />
   </div>
@@ -59,13 +58,14 @@ export default {
   computed: {
     ...mapGetters([
       'allVehicles',
-      'filterVehicleMake'
-    ])
+      'filteredVehicles'
+  ])
   }, 
   methods: {
     showFilteredVehicles() {
       this.showAll = false;
       this.showFiltered = true;
+      console.log(this.filteredVehicles);
     }
   }
 };
