@@ -1,7 +1,7 @@
 import Api from "@/services/Api";
 
 export default {
-  show(make) {
+  filter(make) {
     return Api().get(`search/${make}`);
   },
   all() {

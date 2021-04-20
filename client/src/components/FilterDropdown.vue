@@ -1,46 +1,52 @@
 <template>
-   <div class="dropdown is-hoverable">
+  <div class="dropdown is-hoverable">
     <div class="dropdown-trigger">
-    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span>Make</span>
+      <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span>{{ type }}</span>
         <span class="icon is-small">
         <i class="fas fa-angle-down" aria-hidden="true"></i>
         </span>
-    </button>
+      </button>
     </div>
     <div class="dropdown-menu" id="dropdown-menu" role="menu">
-    <div class="dropdown-content">
-        <a href="/" class="dropdown-item">
-        All makes
-        </a>
-        <a href="/search/acura" class="dropdown-item">
-        Acura
-        </a>
-        <a href="/search/audi" class="dropdown-item">
-        Audi
-        </a>
-        <a href="/search/chevrolet" class="dropdown-item">
-        Chevrolet
-        </a>
-        <a href="/search/ford" class="dropdown-item">
-        Ford
-        </a>
-        <a href="/search/honda" class="dropdown-item">
-        Honda
-        </a>
-    </div>
+      <div class="dropdown-content">
+        <a href="/" class="dropdown-item">All Makes</a>
+        <div v-for="make in allMakes" 
+          :key="make.id" 
+          class="dropdown-item" 
+          @click="addMakeFilter(make)">
+        {{ make }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import EventBus from '../main'
 
 export default ({
   name: "FilterDropdown",
   props: [
     "type",
-    "filterItems",
   ],
+  data () {
+    return {
+      filter: '',
+    }
+  },
+  methods: {
+    addMakeFilter(filter) {
+      this.$store.dispatch('addFilterByMake', filter);
+      EventBus.$emit('added-filter')
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'allMakes'
+    ])
+  }
 })
 </script>
 

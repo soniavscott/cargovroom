@@ -20,7 +20,7 @@ new Vue({
     }
   },
   created () {
-    EventBus.$on("edit-vehicle", input => this.saveEditedVehicle(input))
+    EventBus.$on("edit-vehicle", input => this.saveEditedVehicle(input));
   }
 }).$mount("#app");
 
