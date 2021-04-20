@@ -65,7 +65,7 @@
 </template>
 
 <script>
-
+import EventBus from '../main';
 export default ({
     name: "EditVehicleForm",
     data () {
@@ -78,6 +78,9 @@ export default ({
     },
     methods: {
       saveVehicle(input) {
+        EventBus.$emit('edit-vehicle', {
+          editedDetails: input
+        });
         console.log(input);
       }
     }

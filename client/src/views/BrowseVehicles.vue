@@ -32,7 +32,7 @@ export default {
       this.matchingVehicles = (await SearchService.show(make)).data
       return;
     }
-    this.matchingVehicles = (await SearchService.all()).data
+    this.matchingVehicles = (await SearchService.all()).data;
   },
   components: {
     FilterVehicles,

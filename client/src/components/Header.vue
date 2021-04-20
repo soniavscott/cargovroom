@@ -1,7 +1,7 @@
 <template>
   <div id="header" class="level">
     <div class="level-item has-text-centered">
-      <h1 class="title is-1" id="site-title">cargovroom</h1>
+      <a class="title is-1" id="site-title" href="/">cargovroom</a>
     </div>
     
   </div>

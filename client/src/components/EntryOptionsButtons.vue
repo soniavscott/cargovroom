@@ -12,12 +12,12 @@
             v-model="isEditEntryModalActive"
             has-modal-card
             trap-focus
-            :destroy-on-hide="false"
+            :destroy-on-hide="true"
             aria-role="dialog"
             aria-label="Example Modal"
             aria-modal>
             <template #default="props">
-                <EditVehicleForm @close="props.close" />
+                <EditVehicleForm @close="props.close"/>
             </template>
         </b-modal>
       </div>
@@ -39,29 +39,11 @@
             aria-label="Example Modal"
             aria-modal>
             <template #default="props">
-                <!-- <DeleteVehicleForm @close="props.close" /> -->
                 <DeleteVehicleForm @close="props.close" />
             </template>
         </b-modal>
       </div>
     </section>
-    <!-- <b-icon
-      pack="fas"
-      icon="edit"
-      size="is-medium"
-      id="edit-icon"
-      @click="isComponentModalActive = true">
-    </b-icon>
-    <b-icon
-      pack="fas"
-      icon="trash"
-      size="is-medium"
-      alt="hi"
-      id="delete-icon"
-      @click="openDeleteVehicleEntry()">
-    </b-icon> -->
-  <!-- </div> -->
-  
 </template>
 
 <script>
