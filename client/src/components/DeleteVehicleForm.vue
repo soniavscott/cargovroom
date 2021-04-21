@@ -19,7 +19,7 @@
         <b-button
             label="Delete"
             type="is-primary" 
-            @click="deleteVehicle(1034)"/>
+            @click="deleteVehicle(vehicleId)"/>
       </footer>
     </div>
   </form>
@@ -29,10 +29,10 @@
 
 export default ({
     name: "DeleteVehicleForm",
-    data () {
-    },
+    props: ["vehicleId"],
     methods: {
       deleteVehicle (id) {
+        this.$store.dispatch('deleteVehicle', id);
         console.log(`Vehicle ${id} has been deleted.`);
       }
     }

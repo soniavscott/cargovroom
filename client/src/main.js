@@ -17,6 +17,7 @@ new Vue({
   methods: {
     saveEditedVehicle(input) {
       console.log('saved edited vehicle: ', input);
+      this.$store.dispatch('updateVehicle', input);
     }
   },
   created () {

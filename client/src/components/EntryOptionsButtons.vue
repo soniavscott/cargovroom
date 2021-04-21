@@ -17,7 +17,7 @@
             aria-label="Example Modal"
             aria-modal>
             <template #default="props">
-                <EditVehicleForm @close="props.close"/>
+                <EditVehicleForm @close="props.close" :vehicleId="vehicleId"/>
             </template>
         </b-modal>
       </div>
@@ -39,7 +39,7 @@
             aria-label="Example Modal"
             aria-modal>
             <template #default="props">
-                <DeleteVehicleForm @close="props.close" />
+                <DeleteVehicleForm @close="props.close" :vehicleId="vehicleId" />
             </template>
         </b-modal>
       </div>
@@ -51,7 +51,7 @@ import EditVehicleForm from './EditVehicleForm.vue';
 import DeleteVehicleForm from './DeleteVehicleForm.vue';
 export default ({
     name: "EntryOptionsButtons",
-    props: ["active"],
+    props: ["active", "vehicleId"],
     data () {
       return {
         isEditEntryModalActive: false,

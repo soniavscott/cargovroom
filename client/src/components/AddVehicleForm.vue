@@ -44,6 +44,15 @@
                 v-model="inputCategory">
             </b-input>
         </b-field>
+
+        <b-field label="Color">
+            <b-input
+                type="text"
+                placeholder="black"
+                required
+                v-model="inputColor">
+            </b-input>
+        </b-field>
       </section>
 
       <footer class="modal-card-foot is-justify-content-center">
@@ -57,7 +66,8 @@
               make: inputMake,
               model: inputModel,
               year: inputYear,
-              category: inputCategory
+              category: inputCategory,
+              color: inputColor
             })"/>
       </footer>
     </div>
@@ -74,11 +84,12 @@ export default ({
         inputModel: '',
         inputYear: '',
         inputCategory: '',
+        inputColor: '',
       }
     },
     methods: {
       saveVehicle(input) {
-        console.log(input);
+        this.$store.dispatch('addNewVehicle', input);
       }
     }
 })

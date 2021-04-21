@@ -53,7 +53,6 @@ export default {
   async created () {
     await this.$store.dispatch('getAllVehicles');
     EventBus.$on("added-filter", this.showFilteredVehicles);
-
   },
   computed: {
     ...mapGetters([

@@ -3,6 +3,7 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Edit vehicle entry</p>
+
         <button
             type="button"
             class="delete"
@@ -44,6 +45,16 @@
                 v-model="inputCategory">
             </b-input>
         </b-field>
+
+
+        <b-field label="Color">
+            <b-input
+                type="text"
+                placeholder="black"
+                required
+                v-model="inputColor">
+            </b-input>
+        </b-field>
       </section>
 
       <footer class="modal-card-foot is-justify-content-center">
@@ -54,10 +65,12 @@
             label="Save"
             type="is-primary" 
             @click="saveVehicle({
+              id: vehicleId,
               make: inputMake,
               model: inputModel,
               year: inputYear,
-              category: inputCategory
+              category: inputCategory,
+              color: inputColor
             })"/>
       </footer>
     </div>
@@ -68,20 +81,19 @@
 import EventBus from '../main';
 export default ({
     name: "EditVehicleForm",
+    props: ["vehicleId"],
     data () {
       return {
         inputMake: '',
         inputModel: '',
         inputYear: '',
         inputCategory: '',
+        inputColor: '',
       }
     },
     methods: {
       saveVehicle(input) {
-        EventBus.$emit('edit-vehicle', {
-          editedDetails: input
-        });
-        console.log(input);
+        EventBus.$emit('edit-vehicle', input);
       }
     }
 })

@@ -45,6 +45,27 @@ const actions = {
 
   clearFilter({ commit }, type) {
     commit('UPDATE_FILTER', { type });
+  },
+
+  addNewVehicle(_context, input) {
+    Api().post('/add-new-vehicle', input).then((response) => {
+      console.log('response', response);
+      this.dispatch('getAllVehicles');
+    })
+  },
+
+  updateVehicle(_context, input) {
+    Api().post('/update-vehicle', input).then((response) => {
+      console.log('response', response);
+      this.dispatch('getAllVehicles');
+    })
+  },
+
+  deleteVehicle(_context, id) {
+    Api().post('/delete-vehicle', {id: id}).then((response) => {
+      console.log('response', response);
+      this.dispatch('getAllVehicles');
+    })
   }
 }
 
@@ -145,6 +166,7 @@ function filterBy(filterType, filter, vehicles) {
 */
 function getByType(type, allVehicles) {
   var withDupes = [];
+  console.log('help meee', allVehicles);
   allVehicles.map(vehicle => {
     if (type=="category") {
       vehicle["category"].map(cat => withDupes.push(cat))

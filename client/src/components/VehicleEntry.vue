@@ -1,9 +1,8 @@
 <template>
   <div class="vehicle-entry column card is-one-fifth">
-
   <!-- <div class="vehicle-entry column card is-one-fifth" @mouseover="hover=true" @mouseleave="hover=false"> -->
     <div id="edit-delete-container">
-      <EntryOptionsButtons v-if="hover" />
+      <EntryOptionsButtons v-if="hover" :vehicleId="vehicle.id" />
     </div>
     <div class="card-image">
       <b-image
