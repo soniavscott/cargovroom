@@ -4,13 +4,13 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: process.env.DB_PW,
-  database: 'cars_test'
+  database: 'vehicles'
 })
 
 const db = {}
 db.all = () => {
   return new Promise((resolve, reject) => {
-    connection.query('SELECT * FROM cars', (err, results) => {
+    connection.query('SELECT * FROM vehicles LIMIT 100', (err, results) => {
       if (err) {
         return reject(err)
       }
@@ -21,7 +21,7 @@ db.all = () => {
 
 db.make = (make) => {
   return new Promise((resolve, reject) => {
-    connection.query('SELECT * FROM cars WHERE make=?', make, (err, results) => {
+    connection.query('SELECT * FROM vehicles WHERE make=?', make, (err, results) => {
       if (err) {
         return reject(err)
       }

@@ -32,6 +32,9 @@ const mutations = {
 const actions = {
   getAllVehicles({commit}) {
     Api().get('/').then((response) => {
+      response.data.map(vehicle => {
+        vehicle.category = arrayify(vehicle.category);      
+      })
       commit('UPDATE_ALL_VEHICLES', response.data)
     })
   },
@@ -45,11 +48,18 @@ const actions = {
   }
 }
 
+function arrayify(original) {
+  var str = original.toString().split('[').pop();
+  str = str.split(']')[0];
+  str = str.substring(1, str.length-1);
+  str = str.split('", "');
+  return str;
+}
+
 
 const getters = {
   /** gets all vehicles in db, unfiltered */
   allVehicles: state => state.allVehicles,
-
 
   /** gets dict of all vehicle fields (make, model, category, color...)
    * @return {dict} - { 'make': ['Acura', 'Audi'...], 
@@ -97,13 +107,12 @@ const getters = {
   },
 
 
-  /** gets vehicles that match all current filters
+  /** gets vehicles that match all state.filters 
    * @return {vehicle obj} 
     */
    filteredVehicles: state => {
     var filtered = state.allVehicles;
     filtered = filterBy("make", state.filters.make, filtered);
-    console.log(state.filters.make, filtered);
     filtered = filterBy("model", state.filters.model, filtered);
     filtered = filterBy("year", state.filters.year, filtered);
     filtered = filterBy("category", state.filters.category, filtered);
@@ -120,9 +129,12 @@ const getters = {
  * @returns {[Object]} - list of matching vehicle objects
 */
 function filterBy(filterType, filter, vehicles) {
-  if (filter=='') {
-    return vehicles;
+  if (filter=='') return vehicles;
+
+  if (filterType == "category") {
+    return vehicles.filter(vehicle => vehicle.category.includes(filter));
   }
+
   return vehicles.filter(vehicle => vehicle[filterType] == filter)
 }
 
@@ -132,10 +144,22 @@ function filterBy(filterType, filter, vehicles) {
  * @returns {[String]} - matching values, e.g. ['Acura', 'Audi'...]
 */
 function getByType(type, allVehicles) {
-  const withDupes = allVehicles.map(vehicle => vehicle[type]);
-  const noDupes = [...new Set(withDupes)].sort();
-  return noDupes;
+  var withDupes = [];
+  allVehicles.map(vehicle => {
+    if (type=="category") {
+      vehicle["category"].map(cat => withDupes.push(cat))
+    } else {
+      withDupes.push(vehicle[type])
+    }
+  })
+  return removeDupes(withDupes);
 }
+
+function removeDupes(arr) {
+  return [...new Set(arr)].sort();
+}
+
+
 
 export default new Vuex.Store({
   state,

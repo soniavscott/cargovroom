@@ -19,7 +19,6 @@
 </template>
 
 <script>
-// import SearchService from "../services/SearchService";
 import FilterVehicles from '../components/FilterVehicles';
 import VehicleEntry from "../components/VehicleEntry";
 import AddVehicleButton from '../components/AddVehicleButton';
@@ -35,7 +34,7 @@ export default {
       showFiltered: false,
     }
   },
-  mounted () {
+  // mounted () {
   //   const make = this.$route.params.make
   //   console.log('route', this.$route.params);
   //   if (make) {
@@ -45,7 +44,7 @@ export default {
   //   this.matchingVehicles = (await SearchService.all()).data;
 
     // EventBus.$on("added-filter", this.showFilteredVehicles);
-  },
+  // },
   components: {
     FilterVehicles,
     VehicleEntry,
@@ -54,18 +53,18 @@ export default {
   async created () {
     await this.$store.dispatch('getAllVehicles');
     EventBus.$on("added-filter", this.showFilteredVehicles);
+
   },
   computed: {
     ...mapGetters([
       'allVehicles',
-      'filteredVehicles'
-  ])
+      'filteredVehicles',
+    ])
   }, 
   methods: {
     showFilteredVehicles() {
       this.showAll = false;
       this.showFiltered = true;
-      console.log(this.filteredVehicles);
     }
   }
 };
