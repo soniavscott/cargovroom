@@ -3,7 +3,7 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">{{ messageTitle }}</p>
-        <button type="button" class="delete" @click="$emit('close')"/>
+        <button type="button" class="delete" @click="$emit('closeMessage')"/>
       </header>
       <section class="modal-card-body">
         <h3 v-for="message in messageBodyArr" :key="message.id">

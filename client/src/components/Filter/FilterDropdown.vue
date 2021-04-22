@@ -7,10 +7,18 @@
     aria-role="list"
   >
     <template #trigger>
-        <b-button
-            :label="selectedItem"
-            type="is-grey"
-            icon-right="menu-down" />
+      <b-button
+        v-if="cleared"
+        :label="mainTitle"
+        type="is-grey"
+        icon-right="menu-down"
+      />
+      <b-button
+        v-else
+        :label="selectedItem.toString()"
+        type="is-grey"
+        icon-right="menu-down"
+      />
     </template>
 
     <b-dropdown-item 
@@ -35,39 +43,46 @@
 </template>
 
 <script>
-import EventBus from '../main'
+import { mapGetters } from 'vuex';
+import EventBus from '../../main'
 
 export default ({
   name: "FilterDropdown",
   props: [
     "type",
-    "items"
+    "items",
+    "cleared"
   ],
   data () {
     return {
-      isFiltered: '',
       mainTitle: 'All ' + this.pluralizeType(this.type),
       selectedItem: 'All ' + this.pluralizeType(this.type),
     }
+  },
+  computed: {
+    ...mapGetters([
+      'makeAndModel',
+      'filters',
+    ])
   },
   methods: {
     addFilter(type, filter) {
       type=type.toLowerCase();
       this.$store.dispatch('addFilter', {type, filter});
-      this.isFiltered = filter;
+      this.cleared = false;
       EventBus.$emit('added-filter');
     },
 
     clearFilter(type) {
       type=type.toLowerCase();
       this.$store.dispatch('clearFilter', type);
-      this.isFiltered= '';
     },
 
     pluralizeType(type) {
       if (type=="category") return "categories";
       return type.toLowerCase() + "s";
-    }
+    },
+
   }
 })
 </script>

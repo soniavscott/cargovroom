@@ -10,11 +10,11 @@ const routes = [
     name: "BrowseVehicles",
     component: BrowseVehicles
   },
-  {
-    path: "/search/:make",
-    name: "BrowseVehicles",
-    component: BrowseVehicles
-  }
+  // {
+  //   path: "/search/:make",
+  //   name: "BrowseVehicles",
+  //   component: BrowseVehicles
+  // }
 ];
 
 const router = new VueRouter({

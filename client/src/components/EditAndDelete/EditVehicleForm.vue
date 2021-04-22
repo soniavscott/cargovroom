@@ -29,7 +29,8 @@
         <b-field label="Year">
           <b-input
               class="prefill"
-              type="text"
+              type="number"
+              step="1"
               :placeholder="vehicle.year"
               v-model="inputYear">
           </b-input>     
@@ -81,7 +82,7 @@
 </template>
 
 <script>
-import EventBus from '../main';
+import EventBus from '../../main';
 export default ({
   name: "EditVehicleForm",
   props: ["vehicle"],
@@ -126,7 +127,7 @@ export default ({
         changes.push(`Color: ${this.vehicle.color} --> ${input.color}`)
       }
       return changes;
-    }
+    },
   }
 })
 </script>

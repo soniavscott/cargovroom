@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import EntryOptionsButtons from './EntryOptionsButtons.vue';
+import EntryOptionsButtons from '../EditAndDelete/EntryOptionsButtons.vue';
 export default ({
   name: "VehicleEntry",
   props: ["vehicle"],
@@ -41,20 +41,9 @@ export default ({
 <style lang="scss" scoped>
 .vehicle-entry {
   margin: $size-7;
-  // margin-bottom: $size-3;
   background-color: $white;
   border-bottom: 2px solid $primary;
 
-  // width: 90%;
-
-  :hover {
-    cursor: pointer;
-
-  }
-  // #edit-delete-container {
-  //   height: $size-6;
-  // }
-  
   .card-image {
     margin: 0 $size-4;
   }
@@ -68,8 +57,6 @@ export default ({
     margin-bottom: 0;
 
     #vehicle-make {
-      // margin-bottom: 0;
-      // margin-right: 0.4rem;
       font-weight: $weight-bold;
     }
 
@@ -82,13 +69,10 @@ export default ({
 
     #vehicle-year {
       font-weight: $weight-light;
-      // justify-content: flex-end;
-      // text-align: right;
+
     }
 
-    // #vehicle-model, #vehicle-year {
-    //   font-weight: $weight-light;
-    // }
+
   }
 }
 

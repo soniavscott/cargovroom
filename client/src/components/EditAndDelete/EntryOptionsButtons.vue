@@ -35,7 +35,7 @@
         aria-modal>
         <template #default="props">
           <MessageModal 
-            @close="props.close"
+            @closeMessage="props.close"
             :messageTitle="'Vehicle successfully updated'"
             :messageBodyArr="updates"
           />
@@ -63,7 +63,25 @@
         <template #default="props">
           <DeleteVehicleForm 
             @close="props.close" 
-            :vehicleId="vehicleId" 
+            @deleted="id=>showDeleted(id)"
+            :vehicleId="vehicle.id" 
+          />
+        </template>
+      </b-modal>
+
+      <b-modal
+        v-model="isDeleted"
+        has-modal-card
+        trap-focus
+        :destroy-on-hide="true"
+        aria-role="dialog"
+        aria-label="Message Modal"
+        aria-modal>
+        <template #default="props">
+          <MessageModal 
+            @closeMessage="props.close"
+            :messageTitle="'Vehicle successfully deleted'"
+            :messageBodyArr="''"
           />
         </template>
       </b-modal>
@@ -84,6 +102,7 @@ export default ({
         isDeleteEntryModalActive: false,
         isSaved: false,
         updates: [],
+        isDeleted: false,
       }
     },
     components: {
@@ -95,6 +114,11 @@ export default ({
       showUpdates(edits) {
         this.isSaved = true;
         this.updates = edits;
+      },
+      showDeleted(id) {
+        this.isDeleted = true;
+        console.log(`Vehicle ${id} has been deleted.`);
+
       }
     }
 })

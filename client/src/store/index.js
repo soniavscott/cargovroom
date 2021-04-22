@@ -12,8 +12,11 @@ const state = {
     year: '',
     category: '',
     color: '',
-  }
+  },
+  displayedVehicles: []
 }
+
+
 
 const mutations = {
   UPDATE_ALL_VEHICLES (state, payload) {
@@ -29,9 +32,12 @@ const mutations = {
   }
 }
 
+
+
+
 const actions = {
   getAllVehicles({commit}) {
-    Api().get('/').then((response) => {
+    Api().get('/api').then((response) => {
       response.data.map(vehicle => {
         vehicle.category = arrayify(vehicle.category);      
       })
@@ -47,9 +53,17 @@ const actions = {
     commit('UPDATE_FILTER', { type });
   },
 
+  clearAllFilters({ commit }) {
+    commit ('UPDATE_FILTER', { type: 'make' });
+    commit ('UPDATE_FILTER', { type: 'model'});
+    commit ('UPDATE_FILTER', { type: 'year'});
+    commit ('UPDATE_FILTER', { type: 'category'});
+    commit ('UPDATE_FILTER', { type: 'color'});
+  },
+
   addNewVehicle(_context, input) {
     input.timestamp = getDateTime();
-    Api().post('/add-new-vehicle', input).then((response) => {
+    Api().post('/api/add-new-vehicle', input).then((response) => {
       console.log('response', response);
       this.dispatch('getAllVehicles');
     })
@@ -57,14 +71,14 @@ const actions = {
 
   updateVehicle(_context, input) {
     input.timestamp = getDateTime();
-    Api().post('/update-vehicle', input).then((response) => {
+    Api().post('/api/update-vehicle', input).then((response) => {
       console.log('response', response);
       this.dispatch('getAllVehicles');
     })
   },
 
   deleteVehicle(_context, id) {
-    Api().post('/delete-vehicle', {id: id}).then((response) => {
+    Api().post('/api/delete-vehicle', {id: id}).then((response) => {
       console.log('response', response);
       this.dispatch('getAllVehicles');
     })
@@ -100,7 +114,7 @@ const getters = {
    *                  ...}
    */
   allVehiclesByField: state => {
-    return {
+    const all =  {
       make: {
         type: "make",
         items: getByType("make", state.allVehicles),
@@ -122,6 +136,7 @@ const getters = {
         items: getByType("color", state.allVehicles)
       }
     }
+    return all;
   },
 
   /** 
@@ -137,7 +152,16 @@ const getters = {
       }
       makeAndModel[vehicle.make].push(vehicle.model);
     })
+
     return makeAndModel;
+  },
+
+  filters: state => {
+    return state.filters;
+  },
+
+  availableWithFilters: state => {
+    return getAvailableWithFilters(state.filters, state.allVehicles);
   },
 
 
@@ -191,6 +215,43 @@ function getByType(type, allVehicles) {
 
 function removeDupes(arr) {
   return [...new Set(arr)].sort();
+}
+
+
+function getAvailableWithFilters(filters, allVehicles) {
+  var vehicles = allVehicles;
+  for (let type of Object.keys(filters)) {
+    vehicles = filterBy(type, filters[type], vehicles)
+  }
+  const makes = getByType('make', vehicles);
+  const models = getByType('model', vehicles);
+  const years = getByType('year', vehicles);
+  const category = getByType('category', vehicles);
+  const color = getByType('color', vehicles);
+
+  const available = {
+    makes: {
+      type: 'make',
+      items: makes,
+    },
+    models: {
+      type: 'model',
+      items: models,
+    },
+    years: {
+      type: 'year',
+      items: years,
+    }, 
+    category: {
+      type: 'category', 
+      items: category,
+    }, 
+    color: {
+      type: 'color', 
+      items: color,
+    }
+  }
+  return available;
 }
 
 

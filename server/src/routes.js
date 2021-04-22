@@ -1,7 +1,7 @@
 const db = require('./db')
 
 module.exports = (app) => {
-  app.get('/', async (req, res, next) => {
+  app.get('/api', async (req, res, next) => {
     try {
       const results = await db.all()
       res.json(results)
@@ -10,7 +10,7 @@ module.exports = (app) => {
     }
   })
 
-  app.get('/search/:make', async (req, res, next) => {
+  app.get('/api/:make', async (req, res, next) => {
     try {
       const results = await db.make(req.params.make)
       res.json(results)
@@ -19,7 +19,7 @@ module.exports = (app) => {
     }
   })
 
-  app.post('/add-new-vehicle', async (req, res, next) => {
+  app.post('/api/add-new-vehicle', async (req, res, next) => {
     try {
       const newVehicle = {
         make: req.body.make,
@@ -36,7 +36,7 @@ module.exports = (app) => {
     }
   })
 
-  app.post('/update-vehicle', async (req, res, next) => {
+  app.post('/api/update-vehicle', async (req, res, next) => {
     try {
       const updateInfo = {
         id: req.body.id,
@@ -54,7 +54,7 @@ module.exports = (app) => {
     }
   })
 
-  app.post('/delete-vehicle', async (req, res, next) => {
+  app.post('/api/delete-vehicle', async (req, res, next) => {
     try {
       const id = req.body.id
       const results = await db.delete(id)

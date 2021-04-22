@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import FilterVehicles from '../components/FilterVehicles';
-import VehicleEntry from "../components/VehicleEntry";
-import AddVehicleButton from '../components/AddVehicleButton';
+import FilterVehicles from '../components/Filter/FilterVehicles';
+import VehicleEntry from "../components/Main/VehicleEntry";
+import AddVehicleButton from '../components/AddNewVehicle/AddVehicleButton';
 import { mapGetters } from 'vuex';
 import EventBus from '../main';
 

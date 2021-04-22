@@ -33,7 +33,8 @@ export default ({
     methods: {
       deleteVehicle (id) {
         this.$store.dispatch('deleteVehicle', id);
-        console.log(`Vehicle ${id} has been deleted.`);
+        this.$emit('deleted', id)
+        this.$emit('close')
       }
     }
 })

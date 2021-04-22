@@ -56,9 +56,6 @@
       </section>
 
       <footer class="modal-card-foot is-justify-content-center">
-        <!-- <b-button
-            label="Close"
-            @click="$emit('close')" /> -->
         <b-button
             label="Save"
             type="is-primary" 
@@ -90,6 +87,8 @@ export default ({
     methods: {
       saveVehicle(input) {
         this.$store.dispatch('addNewVehicle', input);
+        this.$emit('added', input)
+        this.$emit('close')
       }
     }
 })

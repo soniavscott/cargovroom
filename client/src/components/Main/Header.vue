@@ -5,21 +5,6 @@
     </div>
     
   </div>
-
-  <!-- <div id="header"> 
-    <div class="site-title-container">
-      <h1 class="site-title">cargovroom</h1>
-    </div>
-
-    <nav class="menu">
-      <div class="menu-item">
-        <router-link to="/">Search</router-link>
-      </div>
-      <div class="menu-item">
-        <router-link to="/honda">Login</router-link>
-      </div>
-    </nav>
-  </div> -->
 </template>
 
 <script>
