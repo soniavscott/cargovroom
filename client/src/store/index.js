@@ -72,11 +72,14 @@ const actions = {
 }
 
 function arrayify(original) {
+  if (original[0] !== "[") {
+    return [original];
+  }
   var str = original.toString().split('[').pop();
   str = str.split(']')[0];
   str = str.substring(1, str.length-1);
-  str = str.split('", "');
-  return str;
+  const clean = str.split('", "');
+  return clean;
 }
 
 function getDateTime() {
