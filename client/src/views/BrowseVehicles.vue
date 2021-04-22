@@ -1,18 +1,21 @@
 <template>
-  <div id="browse-vehicles" class="container">
-    <FilterVehicles class="pointer"/>
+  <div id="browse-vehicles" class="">
+    <FilterVehicles class="pointer container" id="filter-vehicles"/>
 
-    <section v-if="showAll" class="columns is-multiline">
-      <VehicleEntry v-for="vehicle in allVehicles"
-        :key="vehicle.id" 
-        :vehicle="vehicle" />
+    <section>
+      <div v-if="showAll" class="columns is-multiline is-centered">
+        <VehicleEntry v-for="vehicle in allVehicles"
+          :key="vehicle.id" 
+          :vehicle="vehicle" />
+      </div>
+
+      <div v-if="showFiltered" class="columns is-multiline is-centered">
+        <VehicleEntry v-for="vehicle in filteredVehicles"
+          :key="vehicle.id" 
+          :vehicle="vehicle" />
+      </div>
     </section>
 
-    <section v-if="showFiltered" class="columns is-multiline">
-      <VehicleEntry v-for="vehicle in filteredVehicles"
-        :key="vehicle.id" 
-        :vehicle="vehicle" />
-    </section>
 
     <AddVehicleButton id="add-vehicle-button" />
   </div>
@@ -71,14 +74,28 @@ export default {
 </script>
 
 <style lang="scss">
-#browse-vehicles {
-  margin: $size-3;
-}
+// #browse-vehicles {
+  // margin: 0 auto;
+  // width: 100%;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+// }
 
 #add-vehicle-button {
   position: fixed;
   bottom: $size-3;
   right: $size-3;
 }
+
+// #browse-vehicles {
+  // .display-vehicles {
+    // margin: 0 auto;
+  // }
+// }
+
+// #filter-vehicles {
+//   margin: 0 $size-7;
+// }
 
 </style>

@@ -1,29 +1,37 @@
 <template>
-  <div class="dropdown is-hoverable">
-    <div class="dropdown-trigger">
-      <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span v-if="isFiltered">{{ isFiltered }}</span>
-        <span v-else>All {{ pluralizeType(type) }}</span>
-        <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
-      </button>
-    </div>
-    <div class="dropdown-menu" id="dropdown-menu" role="menu">
-      <div class="dropdown-content">
-        <div class="dropdown-item pointer" @click="clearFilter(type)">
-          All {{ pluralizeType(type) }}
-        </div>
+  <b-dropdown
+    :scrollable="true"
+    :max-height="200"
+    :triggers="['hover']"
+    v-model="selectedItem"
+    aria-role="list"
+  >
+    <template #trigger>
+        <b-button
+            :label="selectedItem"
+            type="is-grey"
+            icon-right="menu-down" />
+    </template>
 
-        <div v-for="item in items" 
-          :key="item.id" 
-          class="dropdown-item pointer" 
-          @click="addFilter(type, item)">
-        {{ item }}
+    <b-dropdown-item 
+      :value="mainTitle"
+      @click="clearFilter(type)">
+      {{ mainTitle }}
+    </b-dropdown-item>
+
+    <b-dropdown-item
+        v-for="item in items"
+        :key="item.id"
+        :value="item"
+        aria-role="listitem"
+        @click="addFilter(type, item)">
+        <div class="media">
+          <div class="media-content">
+            <h3>{{ item }}</h3>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </b-dropdown-item>
+  </b-dropdown>
 </template>
 
 <script>
@@ -38,6 +46,8 @@ export default ({
   data () {
     return {
       isFiltered: '',
+      mainTitle: 'All ' + this.pluralizeType(this.type),
+      selectedItem: 'All ' + this.pluralizeType(this.type),
     }
   },
   methods: {
@@ -74,5 +84,10 @@ export default ({
     cursor: pointer;
   }
 
+}
+
+
+a.dropdown-item.is-active {
+  background-color: $accent;
 }
 </style>

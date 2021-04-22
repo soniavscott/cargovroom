@@ -1,5 +1,5 @@
 <template>
-  <div class="vehicle-entry column card is-one-fifth">
+  <div class="vehicle-entry column card is-one-quarter">
   <!-- <div class="vehicle-entry column card is-one-fifth" @mouseover="hover=true" @mouseleave="hover=false"> -->
     <div id="edit-delete-container">
       <EntryOptionsButtons v-if="hover" :vehicleId="vehicle.id" />
@@ -13,7 +13,7 @@
     </div>
 
     <div class="vehicle-info">
-      <div class="is-flex-direction-row">
+      <div class="is-flex-direction-column">
         <p class="size-5" id="vehicle-make">{{ vehicle.make }}</p>
         <p class="size-5" id="vehicle-model">{{ vehicle.model }}</p>
       </div>
@@ -41,9 +41,11 @@ export default ({
 <style lang="scss" scoped>
 .vehicle-entry {
   margin: $size-7;
-  margin-bottom: $size-3;
+  // margin-bottom: $size-3;
   background-color: $white;
   border-bottom: 2px solid $primary;
+
+  // width: 90%;
 
   :hover {
     cursor: pointer;
@@ -66,14 +68,27 @@ export default ({
     margin-bottom: 0;
 
     #vehicle-make {
-      margin-bottom: 0;
-      margin-right: 0.4rem;
+      // margin-bottom: 0;
+      // margin-right: 0.4rem;
       font-weight: $weight-bold;
     }
 
-    #vehicle-model, #vehicle-year {
-      font-weight: $weight-light;
+    
+    #vehicle-model {
+      font-style: italic;
+      font-weight: $weight-medium;
+      font-size: $size-6;
     }
+
+    #vehicle-year {
+      font-weight: $weight-light;
+      // justify-content: flex-end;
+      // text-align: right;
+    }
+
+    // #vehicle-model, #vehicle-year {
+    //   font-weight: $weight-light;
+    // }
   }
 }
 

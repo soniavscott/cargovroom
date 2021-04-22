@@ -26,7 +26,8 @@ module.exports = (app) => {
         model: req.body.model,
         year: parseInt(req.body.year),
         category: req.body.category,
-        color: req.body.color
+        color: req.body.color,
+        timestamp: req.body.timestamp
       }
       const results = await db.create(newVehicle)
       res.json(results)
@@ -43,7 +44,8 @@ module.exports = (app) => {
         model: req.body.model,
         year: req.body.year,
         category: req.body.category,
-        color: req.body.color
+        color: req.body.color,
+        timestamp: req.body.timestamp
       }
       const results = await db.update(updateInfo)
       res.json(results)

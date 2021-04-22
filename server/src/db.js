@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
 const db = {}
 db.all = () => {
   return new Promise((resolve, reject) => {
-    connection.query('SELECT * FROM vehicles ORDER BY id DESC', (err, results) => {
+    connection.query('SELECT * FROM vehicles ORDER BY last_modified DESC', (err, results) => {
       if (err) {
         return reject(err)
       }
@@ -30,9 +30,9 @@ db.make = (make) => {
   })
 }
 
-db.create = ({ make, model, year, category, color }) => {
+db.create = ({ make, model, year, category, color, timestamp }) => {
   return new Promise((resolve, reject) => {
-    connection.query('INSERT INTO vehicles (year, make, model, category, color) VALUES (?, ?, ?, ?, ?);', [year, make, model, category, color], (err, results) => {
+    connection.query('INSERT INTO vehicles (year, make, model, category, color, last_modified) VALUES (?, ?, ?, ?, ?, ?);', [year, make, model, category, color, timestamp], (err, results) => {
       if (err) {
         return reject(err)
       }
@@ -41,9 +41,9 @@ db.create = ({ make, model, year, category, color }) => {
   })
 }
 
-db.update = ({ id, make, model, year, category, color }) => {
+db.update = ({ id, make, model, year, category, color, timestamp }) => {
   return new Promise((resolve, reject) => {
-    connection.query('UPDATE vehicles SET year=?, make=?, model=?, category=?, color=? WHERE id=?', [year, make, model, category, color, id], (err, results) => {
+    connection.query('UPDATE vehicles SET year=?, make=?, model=?, category=?, color=?, last_modified=? WHERE id=?', [year, make, model, category, color, timestamp, id], (err, results) => {
       if (err) {
         return reject(err)
       }

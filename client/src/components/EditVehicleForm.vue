@@ -71,7 +71,7 @@
               year: inputYear,
               category: inputCategory,
               color: inputColor
-            })"/>
+            }); $emit('close'); "/>
       </footer>
     </div>
   </form>

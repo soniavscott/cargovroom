@@ -48,6 +48,7 @@ const actions = {
   },
 
   addNewVehicle(_context, input) {
+    input.timestamp = getDateTime();
     Api().post('/add-new-vehicle', input).then((response) => {
       console.log('response', response);
       this.dispatch('getAllVehicles');
@@ -55,6 +56,7 @@ const actions = {
   },
 
   updateVehicle(_context, input) {
+    input.timestamp = getDateTime();
     Api().post('/update-vehicle', input).then((response) => {
       console.log('response', response);
       this.dispatch('getAllVehicles');
@@ -75,6 +77,14 @@ function arrayify(original) {
   str = str.substring(1, str.length-1);
   str = str.split('", "');
   return str;
+}
+
+function getDateTime() {
+  var now = new Date();
+  now = now.toISOString();
+  var dateTime = now.slice(0, now.length-5).split('T');
+  dateTime = dateTime[0] + ' ' + dateTime[1];
+  return dateTime;
 }
 
 
@@ -166,7 +176,6 @@ function filterBy(filterType, filter, vehicles) {
 */
 function getByType(type, allVehicles) {
   var withDupes = [];
-  console.log('help meee', allVehicles);
   allVehicles.map(vehicle => {
     if (type=="category") {
       vehicle["category"].map(cat => withDupes.push(cat))
